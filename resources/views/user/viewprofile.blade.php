@@ -155,8 +155,9 @@
     </div>
 
      <div class="edit-profile-link">
-        <a href="{{ route('registration.editprofile') }}">Edit Profile</a>
+        <a href="{{ route('registration.editProfile', ['user' => $user]) }}">Edit Profile</a>
     </div>
+
 </div>
 </body>
 </html>

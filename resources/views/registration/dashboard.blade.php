@@ -140,49 +140,61 @@
     </ul>
 </nav>
 
-<div class="dashboard">
-    <h1>Welcome to Your Financial Dashboard</h1>
+@if(auth()->check())
+    <div class="dashboard">
+        <h1>Welcome to Your Financial Dashboard</h1>
 
-    @if(auth()->check())
         <div class="user-info">
             <p>Hello, {{ auth()->user()->firstName }}!</p>
-            <h2>Account Number: {{ auth()->user()->account->accountNumber }}!</h2>
+
+            @if(auth()->user()->account)
+                <h2>Account Number: {{ auth()->user()->account->accountNumber }}!</h2>
+                <p>Account Balance: {{ auth()->user()->account->balance }}</p>
+            @else
+                <p>No associated account found.</p>
+            @endif
+
             <a href="{{ route('registration.userProfile') }}">View Profile</a>
         </div>
-    @endif
 
-    <div class="financial-summary">
-        <div class="summary-box">
-            <h2>Account Balance</h2>
-            <p>{{ auth()->user()->account->balance }}</p>
+        <div class="financial-summary">
+            <div class="summary-box">
+                <h2>Account Balance</h2>
+                @if(auth()->user()->account)
+                    <p>{{ auth()->user()->account->balance }}</p>
+                @else
+                    <p>No associated account found.</p>
+                @endif
+            </div>
+
+            <div class="summary-box">
+                <h2>Income This Month</h2>
+                <p>$5,000.00</p>
+            </div>
+
+            <div class="summary-box">
+                <h2>Expenses This Month</h2>
+                <p>$3,000.00</p>
+            </div>
         </div>
 
-        <div class="summary-box">
-            <h2>Income This Month</h2>
-            <p>$5,000.00</p>
-        </div>
 
-        <div class="summary-box">
-            <h2>Expenses This Month</h2>
-            <p>$3,000.00</p>
-        </div>
-    </div>
-
-    <div class="dashboard-links">
-        <div class="dashboard-link">
+        <div class="dashboard-links">
+            <div class="dashboard-link">
 {{--            <a href="{{ route('transfer') }}">Transfer</a>--}}
-        </div>
+            </div>
 
-        <div class="dashboard-link">
+            <div class="dashboard-link">
 {{--            <a href="{{ route('transaction.history') }}">Transaction History</a>--}}
-        </div>
+            </div>
 
-        <div class="dashboard-link">
+            <div class="dashboard-link">
 {{--            <a href="{{ route('last.transaction.history') }}">Last Transaction History</a>--}}
+            </div>
         </div>
     </div>
-
-    <!-- Additional financial dashboard content goes here -->
-</div>
+@else
+    <script>window.location = "{{ route('welcome') }}";</script>
+@endif
 </body>
 </html>

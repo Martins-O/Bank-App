@@ -35,7 +35,7 @@ class Account extends Model
     public static function generateAccountNumber()
     {
         $prefix = '09';
-        $randomNumber = mt_rand(100000, 999999); // Generate a 6-digit random number
+        $randomNumber = mt_rand(1000, 9999); // Generate a 6-digit random number
         $suffix = now()->format('YmdHis');
 
         // Ensure the total length is 11 digits

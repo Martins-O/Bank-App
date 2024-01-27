@@ -50,7 +50,8 @@ class RegistrationController extends Controller
     }
 
     public function edit(User $user){
-        return view('registration.editprofile', ['user' => $user]);
+//        dd($user);
+        return view('registration.editProfile', ['user' => $user]);
     }
 
     public function setting(){
@@ -58,19 +59,59 @@ class RegistrationController extends Controller
     }
 
     public function update(Request $request, User $user){
-        $validator = $request->validate([
-            'firstName' => 'required|string',
-            'lastName' => 'required|string',
+        $request->validate([
+            'firstName' => 'nullable',
+            'lastName' => 'required',
             'email' => 'required|email',
-            'gender' => 'required|string',
-            'address' => 'required|string',
-            'phoneNumber' => 'required|string',
+            'gender' => 'required',
+            'address' => 'required',
+            'phoneNumber' => 'required',
             'age' => 'required|integer',
         ]);
 
         $user->update($request->all());
+//        dd($user);
 
-        return redirect(route('registration.userProfile'))->with('success', 'Product updated successfully');
+        return redirect(route('registration.userProfile'))->with('success', 'User details updated successfully');
     }
+
+//    public function update(Request $request, User $user){
+//        $validator = $request->validate([
+//            'firstName' => 'required',
+//            'lastName' => 'required',
+//            'email' => 'required|email',
+//            'gender' => 'required',
+//            'address' => 'required',
+//            'phoneNumber' => 'required',
+//            'age' => 'required|integer',
+//        ]);
+//
+//        // Use the $validator variable to check if validation passes
+//        if ($validator) {
+//            // Update the user with the validated data
+//            $user->save($request->all());
+//
+//            return redirect(route('registration.userProfile'))->with('success', 'User updated successfully');
+//        } else {
+//            // Redirect back with validation errors if validation fails
+//            return redirect()->back()->withErrors($validator);
+//        }
+//    }
+
+//    public function update(Request $request){
+//        $user = $request->validate([
+//            'firstName' =>'required',
+//            'lastName' =>'required',
+//            'email' =>'required',
+//            'address' =>'required',
+//            'phoneNumber' =>'required',
+//            'gender' =>'required',
+//            'age' =>'required|integer',
+//        ]);
+//
+//        $user = (new \App\Models\User)->update($request->all());
+//        return redirect(route('registration.userProfile'))->with('success', 'Product updated successfully');
+//    }
+
 
 }

@@ -120,7 +120,7 @@
 <div class="edit-profile-container">
     <h1>Edit Profile</h1>
 
-    <form class="edit-profile-form" method="post" action="{{ route('registration.update') }}">
+    <form class="edit-profile-form" method="post" action="{{ route('registration.update', ['user' => $user]) }}">
         @csrf
         @method( 'PUT' )
 
@@ -131,7 +131,7 @@
         @endif
 
 
-    @if($errors->any())
+        @if($errors->any())
             <div class="error">
                 <ul class="error-list">
                     @foreach($errors->all() as $error)

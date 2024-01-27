@@ -25,7 +25,6 @@ Route::get('/login', [Controllers\SessionsController::class, 'create'])->name('s
 Route::post('/login', [Controllers\SessionsController::class,'store'])->name('session.store');
 Route::get('/logout', [Controllers\SessionsController::class, 'destroy'])->name('session.destroy');
 Route::get('/show', [Controllers\RegistrationController::class, 'userProfile'])->name('registration.userProfile');
-Route::get('/user/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])->name('registration.editprofile');
+Route::get('/user/{user}/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])->name('registration.editProfile');
 Route::put('/update', [App\Http\Controllers\RegistrationController::class, 'update'])->name('registration.update');
-
 Route::put('/setting', [App\Http\Controllers\RegistrationController::class, 'setting'])->name('registration.setting');
